@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'database'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'livesupport'
+app.config['MYSQL_DB'] = 'flask'
 
 mysql.init_app(app)
 
@@ -44,7 +44,7 @@ def bot():
 		msg.body('escribi "ailu" o "gatito"')
 	return str(resp)
 
-	
+
 @app.route('/db', methods=['GET'])
 def db():
 	cursor = mysql.get_db().cursor()
