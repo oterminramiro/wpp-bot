@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flaskext.mysql import MySQL
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
@@ -6,10 +6,10 @@ from twilio.twiml.messaging_response import MessagingResponse
 mysql = MySQL()
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'database'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'flask'
+app.config['MYSQL_DATABASE_HOST'] = 'database'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
+app.config['MYSQL_DATABASE_DB'] = 'flask'
 
 mysql.init_app(app)
 
@@ -47,11 +47,14 @@ def bot():
 
 @app.route('/db', methods=['GET'])
 def db():
-	cursor = mysql.get_db().cursor()
-	sql = "SELECT * FROM Flask"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	raise Exception(results)
+	conn = mysql.connect()
+	cursor = conn.cursor()
+
+	cursor.execute("SELECT * from Test")
+	data = cursor.fetchone()
+	return jsonify({"desired": data})
+
+
 
 if __name__ == '__main__':
 	app.run()
