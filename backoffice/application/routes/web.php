@@ -24,6 +24,7 @@ Route::group('/manage',['middleware' => [
 	// DASHBOARD
 	Route::group('dashboard', function(){
 		Route::get('/', 'manage/dashboard@index');
+		Route::get('/index', 'manage/dashboard@index');
 	});
 
 	// ACCOUNT

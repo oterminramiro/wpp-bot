@@ -1,42 +1,56 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Error</title>
-  <link rel="stylesheet" href="/assets/themes/errors/vendors/css/vendor.bundle.base.css">  
-  <link rel="stylesheet" href="/assets/themes/errors/css/style.css">
-</head>
-<body>
-  <div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center text-center error-page bg-primary">
-        <div class="row flex-grow">
-          <div class="col-lg-7 mx-auto text-white">
-            <div class="row align-items-center d-flex flex-row">
-              <div class="col-lg-6 text-lg-right pr-lg-4">
-                <h1 class="display-1 mb-0">404</h1>
-              </div>
-              <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
-                <h2>LO SENTIMOS!</h2>
-                <h3 class="font-weight-light">Esta página no está disponible</h3>
-              </div>
+    <head>
+        <meta charset="utf-8" />
+        <title>Not found</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="/assets/themes/app/images/favicon.ico">
+
+        <!-- App css -->
+        <link href="/assets/themes/app/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/themes/app/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/themes/app/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="authentication-bg">
+
+        <div class="account-pages my-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-5 col-8">
+                        <div class="text-center">
+
+                            <div>
+                                <img src="/assets/themes/app/images/not-found.png" alt="" class="img-fluid" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h3 class="mt-3">We couldn’t connect the dots</h3>
+                        <p class="text-muted mb-5">This page was not found. <br/> You may have mistyped the address or the page may have moved.</p>
+
+                        <a href="/" class="btn btn-lg btn-primary mt-4">Take me back to Home</a>
+                    </div>
+                </div>
             </div>
-            <div class="row mt-5">
-              <div class="col-12 text-center mt-xl-2">
-                <a class="text-white font-weight-medium" href="/">Volver al inicio</a>
-              </div>
-            </div>
-            <div class="row mt-5">
-              <div class="col-12 mt-xl-2">
-                <p class="text-white font-weight-medium text-center">Copyright &copy; <?php echo date("Y"); ?> All rights reserved.</p>
-              </div>
-            </div>
-          </div>
+            <!-- end container -->
         </div>
-      </div>
-    </div>
-  </div>
-</body>
+        <!-- end account-pages -->
+
+        <!-- Vendor js -->
+        <script src="/assets/themes/app/js/vendor.min.js"></script>
+
+        <!-- App js -->
+        <script src="/assets/themes/app/js/app.min.js"></script>
+
+    </body>
 </html>

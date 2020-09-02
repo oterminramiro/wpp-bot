@@ -1,146 +1,163 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-		<meta name="author" content="Creative Tim">
+		<meta charset="utf-8" />
 		<title><?php echo $title; ?></title>
-		<!-- Favicon -->
-		<link rel="icon" href="/assets/themes/app/img/brand/favicon.png" type="image/png">
-		<!-- Fonts -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-		<!-- Icons -->
-		<link rel="stylesheet" href="/assets/themes/app/vendor/nucleo/css/nucleo.css" type="text/css">
-		<link rel="stylesheet" href="/assets/themes/app/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
-		<!-- Page plugins -->
-		<!-- Argon CSS -->
-		<link rel="stylesheet" href="/assets/themes/app/css/argon.css?v=1.2.0" type="text/css">
-		<link rel="stylesheet" href="/assets/themes/app/vendor/font-awesome-pro/css/all.min.css" type="text/css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta content="Wpp bot" name="description" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<!-- App favicon -->
+		<link rel="shortcut icon" href="/assets/themes/app/images/favicon.ico">
+		<!-- plugins -->
+		<link href="/assets/themes/app/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+		<!-- App css -->
+		<link href="/assets/themes/app/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/themes/app/css/icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/themes/app/css/app.min.css" rel="stylesheet" type="text/css" />
 
 		<?php if(isset($css_files)):?>
 			<?php foreach($css_files as $css):?>
 				<link type="text/css" rel="stylesheet" href="<?php echo $css;?>" />
 			<?php endforeach;?>
 		<?php endif;?>
+
 	</head>
-	<body>
+	<body data-layout="topnav">
+		<!-- Begin page -->
+		<div class="wrapper">
 
-		<!-- Sidenav -->
-		<?php $this->load->view('app/partials/sidenav'); ?>
+			<!-- ============================================================== -->
+			<!-- Start Page Content here -->
+			<!-- ============================================================== -->
 
-
-		<!-- Main content -->
-		<div class="main-content" id="panel">
-			<!-- Topnav -->
-			<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+			<!-- Topbar Start -->
+			<div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
 				<div class="container-fluid">
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<!-- Search form -->
-						<form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-							<div class="form-group mb-0">
-								<div class="input-group input-group-alternative input-group-merge">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><i class="fas fa-search"></i></span>
-									</div>
-									<input class="form-control" placeholder="Search" type="text">
-								</div>
-							</div>
-							<button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-							<span aria-hidden="true">×</span>
+					<!-- LOGO -->
+					<a href="index.html" class="navbar-brand mr-0 mr-md-2 logo">
+						<span class="logo-lg">
+							<img src="/assets/themes/app/images/logo.png" alt="" height="24" />
+							<span class="d-inline h5 ml-1 text-logo"><?php echo $this->user->Email ?></span>
+						</span>
+						<span class="logo-sm">
+							<img src="/assets/themes/app/images/logo.png" alt="" height="24">
+						</span>
+					</a>
+
+					<ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+						<li class="">
+							<button class="button-menu-mobile open-left disable-btn">
+								<i data-feather="menu" class="menu-icon"></i>
+								<i data-feather="x" class="close-icon"></i>
 							</button>
-						</form>
-						<!-- Navbar links -->
-						<ul class="navbar-nav align-items-center  ml-md-auto ">
-							<li class="nav-item d-xl-none">
-								<!-- Sidenav toggler -->
-								<div class="pr-3 sidenav-toggler sidenav-toggler-light" data-action="sidenav-pin" data-target="#sidenav-main">
-									<div class="sidenav-toggler-inner">
-										<i class="sidenav-toggler-line"></i>
-										<i class="sidenav-toggler-line"></i>
-										<i class="sidenav-toggler-line"></i>
+						</li>
+					</ul>
+
+					<ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+						<li class="d-none d-sm-block">
+							<div class="app-search">
+								<form>
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search...">
+										<span data-feather="search"></span>
 									</div>
-								</div>
-							</li>
-							<li class="nav-item d-sm-none">
-								<a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-								<i class="ni ni-zoom-split-in"></i>
-								</a>
-							</li>
-						</ul>
-						<ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-							<li class="nav-item dropdown">
-								<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<div class="media align-items-center">
-										<div class="media-body  ml-2  d-none d-lg-block">
-											<span class="mb-0 text-sm  font-weight-bold">
-												<?php echo $this->user->Email ?>
-											</span>
-										</div>
+								</form>
+							</div>
+						</li>
+
+						<li class="dropdown notification-list align-self-center profile-dropdown">
+							<a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+								aria-haspopup="false" aria-expanded="false">
+								<div class="media user-profile ">
+									<img src="/assets/themes/app/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
+									<div class="media-body text-left">
+										<h6 class="pro-user-name ml-2 my-0">
+											<span><?php echo $this->user->Email ?></span>
+											<span class="pro-user-desc text-muted d-block mt-1"><?php echo $this->user->Role->Name ?></span>
+										</h6>
 									</div>
-								</a>
-								<div class="dropdown-menu  dropdown-menu-right ">
-									<a href="/manage/account/account/" class="dropdown-item">
-										<i class="ni ni-single-02"></i>
-										<span><?php echo $this->lang->line('app_menu_account') ?></span>
-									</a>
-									<div class="dropdown-divider"></div>
-									<a href="/manage/account/logout/" class="dropdown-item">
-										<i class="ni ni-user-run"></i>
-										<span><?php echo $this->lang->line('app_menu_logout') ?></span>
-									</a>
+									<span data-feather="chevron-down" class="ml-2 align-self-center"></span>
 								</div>
-							</li>
-						</ul>
+							</a>
+							<div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
+								<a href="/manage/account/account/" class="dropdown-item notify-item">
+									<i data-feather="user" class="icon-dual icon-xs mr-2"></i>
+									<span><?php echo $this->lang->line('app_menu_account') ?></span>
+								</a>
+
+								<a href="javascript:void(0);" class="dropdown-item notify-item">
+									<i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
+									<span>Settings</span>
+								</a>
+
+								<div class="dropdown-divider"></div>
+
+								<a href="/manage/account/logout/" class="dropdown-item notify-item">
+									<i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
+									<span><?php echo $this->lang->line('app_menu_logout') ?></span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<!-- end Topbar -->
+
+			<!-- Sidenav -->
+			<?php $this->load->view('app/partials/sidenav'); ?>
+
+			<div class="content-page">
+				<div class="content">
+					<!-- Start Content-->
+					<div class="container-fluid">
+
+						<?php if(isset($breadcrumb)): ?>
+							<?php $this->load->view($breadcrumb); ?>
+						<?php endif ?>
+
+
+						<?php if(isset($content)): ?>
+							<?php $this->load->view($content); ?>
+						<?php endif ?>
+
 					</div>
 				</div>
-			</nav>
 
-			<!-- Header -->
-			<div class="header pb-6 bg-primary">
-				<div class="container-fluid">
-					<div class="header-body">
-						<div class="row align-items-center py-4">
-							<div class="col-lg-6 col-7">
-								<h6 class="h2 text-white d-inline-block mb-0"><?php echo $title; ?></h6>
-								<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-									<ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-										<li class="breadcrumb-item"><a href="/manage/dashboard/index"><i class="fas fa-home"></i></a></li>
-										<li class="breadcrumb-item"><a href="/manage/dashboard/index"><?php echo $this->lang->line('app_menu_home') ?></a></li>
-										<li class="breadcrumb-item active" aria-current="page"><?php echo $title; ?></li>
-									</ol>
-								</nav>
-							</div>
-							<div class="col-lg-6 col-5 text-right">
-								<a href="#" class="btn btn-sm btn-neutral"><?php echo $this->lang->line('app_menu_return') ?></a>
+
+				<!-- Footer Start -->
+				<footer class="footer">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-12">
+								2019 &copy; Shreyu. All Rights Reserved. Crafted with <i class='uil uil-heart text-danger font-size-12'></i> by <a href="https://coderthemes.com" target="_blank">Coderthemes</a>
 							</div>
 						</div>
 					</div>
-				</div>
+				</footer>
+				<!-- end Footer -->
 			</div>
-
-
-			<!-- Page content -->
-			<div class="container-fluid mt--6">
-				<div class="row">
-					<div class="col-xl-12 col-md-12">
-						<?php $this->load->view($content); ?>
-					</div>
-				</div>
-			</div>
+			<!-- ============================================================== -->
+			<!-- End Page content -->
+			<!-- ============================================================== -->
 		</div>
-		<!-- Argon Scripts -->
-		<!-- Core -->
-		<script src="/assets/themes/app/vendor/jquery/dist/jquery.min.js"></script>
-		<script src="/assets/themes/app/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="/assets/themes/app/vendor/js-cookie/js.cookie.js"></script>
-		<script src="/assets/themes/app/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-		<script src="/assets/themes/app/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
-		<!-- Optional JS -->
-		<script src="/assets/themes/app/vendor/jvectormap-next/jquery-jvectormap.min.js"></script>
-		<script src="/assets/themes/app/js/vendor/jvectormap/jquery-jvectormap-world-mill.js"></script>
-		<!-- Argon JS -->
-		<script src="/assets/themes/app/js/argon.js?v=1.2.0"></script>
+
+		<!-- Vendor js -->
+		<script src="/assets/themes/app/js/vendor.min.js"></script>
+
+		<!-- optional plugins -->
+		<script src="/assets/themes/app/libs/moment/moment.min.js"></script>
+		<script src="/assets/themes/app/libs/apexcharts/apexcharts.min.js"></script>
+		<script src="/assets/themes/app/libs/flatpickr/flatpickr.min.js"></script>
+
+		<!-- page js -->
+		<script src="/assets/themes/app/js/pages/dashboard.init.js"></script>
+
+		<!-- App js -->
+		<script src="/assets/themes/app/js/app.min.js"></script>
+
 		<?php if(isset($js_files)):?>
 			<?php foreach($js_files as $js):?>
 				<script src="<?php echo $js;?>"></script>
