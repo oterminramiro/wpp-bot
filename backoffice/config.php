@@ -20,9 +20,9 @@ class AppConfig
 				'prefix' => '',
 			],
 			'sendgrid' => [
-				'api' => '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',
-				'name' => 'Auto Renta',
-				'from' => 'no-reply@livesupport.digital'
+				'api' => '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',
+				'name' => 'Wpp Bot',
+				'from' => 'oterminramiro@gmail.com'
 			]
 		];
 	}
