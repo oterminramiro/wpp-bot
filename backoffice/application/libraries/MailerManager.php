@@ -13,8 +13,8 @@ class MailerManager
 
 	public function recoverPassword($user,$code)
 	{
-		$language = Language::where('language_id',$user->language_id)->first();
-		$this->CI->lang->load('email',$language->key);
+		$language = Language::where('IdLanguage',$user->IdLanguage)->first();
+		$this->CI->lang->load('email',$language->Label);
 
 		$body = $this->CI->load->view('email/template',[
 			'title' => $this->CI->lang->line('email_recover_password_title'),
@@ -27,7 +27,7 @@ class MailerManager
 		$email = new \SendGrid\Mail\Mail();
 		$email->setFrom(AppConfig::get()['sendgrid']['from'], AppConfig::get()['sendgrid']['name']);
 		$email->setSubject($this->CI->lang->line('email_recover_password_title'));
-		$email->addTo($user->username, $user->name . ' ' . $user->lastname);
+		$email->addTo($user->Email);
 		$email->addContent(
 			"text/html", $body
 		);
@@ -44,8 +44,8 @@ class MailerManager
 
 	public function updatePassword($user)
 	{
-		$language = Language::where('IdLanguage',$user->language_id)->first();
-		$this->CI->lang->load('email',$language->key);
+		$language = Language::where('IdLanguage',$user->IdLanguage)->first();
+		$this->CI->lang->load('email',$language->Label);
 
 		$body = $this->CI->load->view('email/template',[
 			'title' => $this->CI->lang->line('email_recover_success_title'),
@@ -57,7 +57,7 @@ class MailerManager
 		$email = new \SendGrid\Mail\Mail();
 		$email->setFrom(AppConfig::get()['sendgrid']['from'], AppConfig::get()['sendgrid']['name']);
 		$email->setSubject($this->CI->lang->line('email_recover_success_title'));
-		$email->addTo($user->username, $user->name . ' ' . $user->lastname);
+		$email->addTo($user->Email);
 		$email->addContent(
 			"text/html", $body
 		);
@@ -74,8 +74,8 @@ class MailerManager
 
 	public function sendPassword($user,$pass)
 	{
-		$language = Language::where('IdLanguage',$user->language_id)->first();
-		$this->CI->lang->load('email',$language->key);
+		$language = Language::where('IdLanguage',$user->IdLanguage)->first();
+		$this->CI->lang->load('email',$language->Label);
 
 		$body = $this->CI->load->view('email/template',[
 			'title' => $this->CI->lang->line('email_password_send_title'),
@@ -85,10 +85,11 @@ class MailerManager
 			'pass' => $pass,
 		],TRUE);
 
+
 		$email = new \SendGrid\Mail\Mail();
 		$email->setFrom(AppConfig::get()['sendgrid']['from'], AppConfig::get()['sendgrid']['name']);
 		$email->setSubject($this->CI->lang->line('email_password_send_title'));
-		$email->addTo($user->username, $user->name . ' ' . $user->lastname);
+		$email->addTo($user->Email);
 		$email->addContent(
 			"text/html", $body
 		);
