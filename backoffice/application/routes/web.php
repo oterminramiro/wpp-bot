@@ -38,8 +38,14 @@ Route::group('/manage',['middleware' => [
 		Route::match(['get','post'], 'index', 'manage/organizations@index');
 	});
 
+	// OPTIONS
+	Route::group('options', function(){
+		Route::match(['get','post'], 'index', 'manage/options@index');
+	});
+
 	// USERS
 	Route::group('users', function(){
+		Route::match(['get','post'], 'managers', 'manage/users@managers');
 		Route::match(['get','post'], 'operators', 'manage/users@operators');
 		Route::match(['get','post'], 'login_as/{guid}', 'manage/users@login_as');
 		Route::match(['get','post'], 'send_password/{guid}', 'manage/users@send_password');

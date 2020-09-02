@@ -14,20 +14,35 @@
 					</li>
 					<li>
 						<a href="javascript: void(0);">
-							<i data-feather="inbox"></i>
+							<i data-feather="tool"></i>
 							<span> <?php echo $this->lang->line('app_menu_manage') ?> </span>
 							<span class="menu-arrow"></span>
 						</a>
 
 						<ul class="nav-second-level" aria-expanded="false">
+							<?php if($this->sessionManager->checkRole(['ADMIN'])): ?>
 							<li>
 								<a href="/manage/organizations/index"><?php echo $this->lang->line('app_menu_organizations') ?></a>
 							</li>
+							<?php endif ?>
 							<li>
 								<a href="/manage/options/index"><?php echo $this->lang->line('app_menu_options') ?></a>
 							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript: void(0);">
+							<i data-feather="users"></i>
+							<span> <?php echo $this->lang->line('app_menu_users') ?> </span>
+							<span class="menu-arrow"></span>
+						</a>
+
+						<ul class="nav-second-level" aria-expanded="false">
 							<li>
-								<a href="/manage/organizations/index"><?php echo $this->lang->line('app_menu_organizations') ?></a>
+								<a href="/manage/users/managers"><?php echo $this->lang->line('app_menu_managers') ?></a>
+							</li>
+							<li>
+								<a href="/manage/users/operators"><?php echo $this->lang->line('app_menu_operators') ?></a>
 							</li>
 						</ul>
 					</li>

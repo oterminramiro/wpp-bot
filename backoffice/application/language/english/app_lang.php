@@ -46,12 +46,14 @@ $lang['app_menu_return'] = 'Return';
 $lang['app_menu_search'] = 'Search';
 
 $lang['app_menu_options'] = 'Options';
-$lang['app_menu_options_all_mini'] = 'O';
 $lang['app_menu_options_all'] = 'Options';
 
 $lang['app_menu_manage'] = 'Manage';
-$lang['app_menu_organizations_mini'] = 'O';
 $lang['app_menu_organizations'] = 'Organizations';
+
+$lang['app_menu_users'] = 'Users';
+$lang['app_menu_managers'] = 'Managers';
+$lang['app_menu_operators'] = 'Operators';
 
 $lang['app_menu_account'] = 'My account';
 $lang['app_menu_logout'] = 'Logout';
@@ -93,3 +95,15 @@ $lang['app_crud_rate_user_login_as'] = 'Login as';
 $lang['app_crud_rate_user_send_password'] = 'Send password';
 $lang['app_crud_rate_user_title_customer'] = 'Customers';
 $lang['app_crud_rate_user_title_operator'] = 'Operators';
+
+
+$lang['app_crud_option_title'] = 'Options';
+$lang['app_crud_option_id_organization'] = 'Organization';
+$lang['app_crud_option_id_option_type'] = 'Option Type';
+$lang['app_crud_option_name'] = 'Name';
+$lang['app_crud_option_order'] = 'Order';
+$lang['app_crud_option_key_word'] = 'Key Word';
+$lang['app_crud_option_id_option_value'] = 'More Options';
+$lang['app_crud_option_created'] = 'Created';
+$lang['app_crud_option_no_options'] = 'Add more options';
+$lang['app_crud_option_options'] = 'See more options';

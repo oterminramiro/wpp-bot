@@ -318,6 +318,8 @@ class ComposerStaticInit7ffce26b4d0161ecf65bb6db9bec5d0e
         'MimetypeTest' => __DIR__ . '/../..' . '/application/libraries/GroceryCrudEnterprise/codeguy/upload/tests/Validation/MimetypeTest.php',
         'MyReadFilter' => __DIR__ . '/../..' . '/application/libraries/GroceryCrudEnterprise/scoumbourdis/phpexcel/Documentation/Examples/Reader/exampleReader09.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'Option' => __DIR__ . '/../..' . '/application/models/Option.php',
+        'OptionType' => __DIR__ . '/../..' . '/application/models/OptionType.php',
         'Organization' => __DIR__ . '/../..' . '/application/models/Organization.php',
         'PHPExcel' => __DIR__ . '/../..' . '/application/libraries/GroceryCrudEnterprise/scoumbourdis/phpexcel/Classes/PHPExcel.php',
         'PHPExcel_Autoloader' => __DIR__ . '/../..' . '/application/libraries/GroceryCrudEnterprise/scoumbourdis/phpexcel/Classes/PHPExcel/Autoloader.php',

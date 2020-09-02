@@ -78,6 +78,8 @@ return array(
     'MimetypeTest' => $baseDir . '/application/libraries/GroceryCrudEnterprise/codeguy/upload/tests/Validation/MimetypeTest.php',
     'MyReadFilter' => $baseDir . '/application/libraries/GroceryCrudEnterprise/scoumbourdis/phpexcel/Documentation/Examples/Reader/exampleReader09.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+    'Option' => $baseDir . '/application/models/Option.php',
+    'OptionType' => $baseDir . '/application/models/OptionType.php',
     'Organization' => $baseDir . '/application/models/Organization.php',
     'PHPExcel' => $baseDir . '/application/libraries/GroceryCrudEnterprise/scoumbourdis/phpexcel/Classes/PHPExcel.php',
     'PHPExcel_Autoloader' => $baseDir . '/application/libraries/GroceryCrudEnterprise/scoumbourdis/phpexcel/Classes/PHPExcel/Autoloader.php',

@@ -112,55 +112,7 @@
 		</div>
 	</div>
 
-	<div class="col-xl-6">
-		<div class="card">
-			<div class="card-body pb-0">
-				<ul class="nav card-nav float-right">
-					<li class="nav-item">
-						<a class="nav-link text-muted" href="#">Today</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-muted" href="#">7d</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="#">15d</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-muted" href="#">1m</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-muted" href="#">1y</a>
-					</li>
-				</ul>
-				<h5 class="card-title mb-0 header-title">Revenue</h5>
-
-				<div id="revenue-chart" class="apex-charts mt-3"  dir="ltr"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-xl-3">
-		<div class="card">
-			<div class="card-body pb-0">
-				<h5 class="card-title mt-0 mb-0 header-title">Targets</h5>
-				<div id="targets-chart" class="apex-charts mt-3" dir="ltr"></div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- row -->
-
-<!-- products -->
-<div class="row">
-	<div class="col-xl-5">
-		<div class="card">
-			<div class="card-body">
-				<h5 class="card-title mt-0 mb-0 header-title">Sales By Category</h5>
-				<div id="sales-by-category-chart" class="apex-charts mb-0 mt-4" dir="ltr"></div>
-			</div> <!-- end card-body-->
-		</div> <!-- end card-->
-	</div> <!-- end col-->
-	<div class="col-xl-7">
+	<div class="col-xl-9">
 		<div class="card">
 			<div class="card-body">
 				<a href="" class="btn btn-primary btn-sm float-right">
