@@ -1,26 +1,34 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users extends AdminController
+class Organizations extends AdminController
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function customers()
+	public function index()
+	{
+		$this->organizations();
+	}
+
+	public function organizations()
 	{
 		if(!$this->sessionManager->checkRole(['ADMIN','OPERATOR'])) show_404();
 		$crud = $this->_getGroceryCrudEnterprise();
 
-		$crud->setTable('user');
+		$crud->setTable('Organization');
 		$crud->unsetBootstrap();
 		$crud->unsetJquery();
 		$crud->setSkin('bootstrap-v4');
 
-		$crud->unsetOperations();
+		$crud->setLanguage(ucfirst($this->session->userdata('language_label')));
 
-		$crud->setLanguage(ucfirst($this->session->userdata('language_key')));
+		$crud->columns(['Name','Address','Created']);
+		$crud->fields(['Name','Address']);
 
+
+		/*
 		$crud->displayAs('language_id',$this->lang->line('app_crud_rate_user_language_id'));
 		$crud->displayAs('role_id',$this->lang->line('app_crud_rate_user_role_id'));
 		$crud->displayAs('username',$this->lang->line('app_crud_rate_user_username'));
@@ -43,7 +51,17 @@ class Users extends AdminController
 
 		$crud->where([
 			'user.role_id' => Role::CUSTOMER
-		]);
+		]);*/
+
+		$crud->callbackBeforeInsert(function ($stateParameters) {
+			$stateParameters->data['Guid'] = guid();
+			$stateParameters->data['Created'] = date_now();
+			$stateParameters->data['Updated'] = date_now();
+
+			return $stateParameters;
+		});
+
+
 
 		$output = $crud->render();
 
@@ -53,7 +71,7 @@ class Users extends AdminController
 			exit;
 		}
 		// APPEND
-		$output->js_files[] = '/assets/views/manage/modal.js';
+		#$output->js_files[] = '/assets/views/manage/modal.js';
 
 		$this->load->view('app/template', [
 			'title' => $this->lang->line('app_crud_rate_user_title_customer'),

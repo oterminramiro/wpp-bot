@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 
 $capsule = new Capsule;
 $capsule->addConnection(array(
-    'driver'    => AppConfig::get()['db']['driver'],
+    'driver'    => 'mysql',
     'host'      => AppConfig::get()['db']['hostname'],
     'database'  => AppConfig::get()['db']['database'],
     'username'  => AppConfig::get()['db']['username'],
@@ -49,7 +49,7 @@ $capsule->setAsGlobal();
 
 
 
-if (ENVIRONMENT == 'development') 
+if (ENVIRONMENT == 'development')
 {
     $config['base_url'] = AppConfig::get()['core']['production_url'];
 }

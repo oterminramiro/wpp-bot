@@ -114,9 +114,7 @@
 					<!-- Start Content-->
 					<div class="container-fluid">
 
-						<?php if(isset($breadcrumb)): ?>
-							<?php $this->load->view($breadcrumb); ?>
-						<?php endif ?>
+						<?php $this->load->view('app/partials/breadcrumb'); ?>
 
 
 						<?php if(isset($content)): ?>

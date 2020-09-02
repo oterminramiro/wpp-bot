@@ -33,6 +33,11 @@ Route::group('/manage',['middleware' => [
 		Route::match(['get','post'], 'logout', 'manage/account@logout');
 	});
 
+	// ORG
+	Route::group('organizations', function(){
+		Route::match(['get','post'], 'index', 'manage/organizations@index');
+	});
+
 	// USERS
 	Route::group('users', function(){
 		Route::match(['get','post'], 'operators', 'manage/users@operators');
