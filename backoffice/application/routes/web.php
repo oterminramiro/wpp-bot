@@ -41,6 +41,7 @@ Route::group('/manage',['middleware' => [
 	// OPTIONS
 	Route::group('options', function(){
 		Route::match(['get','post'], 'index', 'manage/options@index');
+		Route::match(['get','post'], 'options_value/{guid}', 'manage/options@options_value');
 	});
 
 	// USERS

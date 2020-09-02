@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flaskext.mysql import MySQL
 import redis
 import requests
+import pickle
 from twilio.twiml.messaging_response import MessagingResponse
 
 mysql = MySQL()
@@ -78,14 +79,55 @@ def db():
 
 @app.route('/redis', methods=['GET'])
 def redis():
-	#cache.hset('customers','+5491141461868', 'hola')
-	#delcache = cache.hdel('customers','+5491141461868')
-	get = cache.hget('customers','+5491141461868')
-	if get == None:
+
+	delcache = cache.hdel('customers','+5491141461868')
+	get_cache = cache.hget('customers','+5491141461868')
+	if get_cache == None:
 		return 'es null'
 	else:
-		return get
+		pass
 
+@app.route('/org/<username>', methods=['POST'])
+def org(username):
+	answer = request.form.get("Answer")
+
+	conn = mysql.connect()
+	cursor = conn.cursor()
+
+	# Get Organization
+	cursor.execute("SELECT * from Organization WHERE Name=%s", username)
+	org = cursor.fetchone()
+
+	get_cache = cache.hget('customers','+5491141461868')
+	if get_cache == None:
+		cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
+		option = cursor.fetchall()
+
+		cache.hset('customers','+5491141461868', pickle.dumps(option))
+
+		return jsonify({"desired": option})
+	else:
+		# Convertir a lista
+		response = list(pickle.loads(get_cache))
+		if response:
+			# Result devuelve una lista con el tuple q concuerda al filtro
+			result = [item for item in response if item[3] == answer]
+
+			# Buscar las opciones siguentes a la anterior
+			cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", result[0][0])
+			option = cursor.fetchall()
+
+			if option == None:
+				return jsonify({"desired": "no option"})
+			else:
+				return jsonify({"desired": option})
+		else:
+			cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
+			option = cursor.fetchall()
+
+			cache.hset('customers','+5491141461868', pickle.dumps(option))
+
+			return jsonify({"desired": option})
 
 
 if __name__ == '__main__':
