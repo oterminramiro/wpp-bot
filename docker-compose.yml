@@ -1,5 +1,7 @@
 version: '3'
+
 services:
+
   web:
     build: .
     ports:
@@ -8,6 +10,16 @@ services:
       - .:/code
     environment:
       FLASK_ENV: development
+
+  server:
+    image: nanoninja/php-fpm
+    depends_on:
+      - database
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backoffice/:/var/www/html/
+    command: php -S="0.0.0.0:8000" -t="/var/www/html/"
 
   redis:
     image: "redis:alpine"

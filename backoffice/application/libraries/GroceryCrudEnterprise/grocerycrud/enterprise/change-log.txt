@@ -1,0 +1,321 @@
+2.8.1
+    [Feature]
+    - GC-433: Create a button "Reset Ordering" to reset the ordering to the "no ordering" state
+    [Bug fixing]
+    - Fixing some deprecated warnings from PHP 7.4
+    [Libraries update]
+    - Update PHPExcel to also support PHP 7.4 version
+    [Code Cleanup]
+    - Cleanup jQuery libraries in order to get them internally from functions rather than hardcoding them
+    - Remove Modernizr as it is not in use anymore from Grocery CRUD Enterprise.
+2.8.0
+    [Feature]
+    - GC-428: Introducing the 'invisible' field type
+    [Bug fixing]
+    - GC-422: Revert changes for "GC-228: not all the row available in a callback column"
+    - GC-431: Quick Search: The date input fields values are not visible when we are choosing them from the datepicker
+    - GC-430: SQL Lite doesn't work with PHP 7.3 (it throws an error)
+    [Security]
+    - GC-432: Filter private data that are not on readFields, editFields and cloneFields
+2.7.13
+    [Feature]
+    - GC-419: Support sequence name for Postgres databases. New function: setSequenceName
+    [Bug fixing]
+    - GC-420: Show search column data even after the column is hidden
+    - GC-423: Javascript error on page with Relation N to N
+    [Libraries update]
+    - Valitron update to version 1.4.5
+2.7.12
+    [Bug fixing]
+    - GC-415: Fixing bug for dropdown_search in view form
+    [Feature]
+    - GC-417: Support database schema for Postgres. New function: setDatabaseSchema
+2.7.11
+    [Bug fixing]
+    - GC-410: Integers, dates and datetime field type should search with equal and not with LIKE comparison
+    - GC-411: unsetSearchColumns doesn't work anymore
+    [Translations]
+    - GC-412: Adding Russian translation for all the strings
+2.7.10
+    [Feature]
+    - GC-390: Add Bootstrap skin at the configuration
+    [Bug fixing]
+    - GC-408: unsetDelete will need to remove both single and multiple deletion
+    [Code Cleanup]
+    - GC-403: All the datagrid now uses React with Redux and "Redux connect"
+2.7.9
+    [Bug fixing]
+    GC-407: Translations doesn't render correctly on Datagrid Filtering
+    [Code Cleanup]
+    GC-403: Refactoring Paging with React
+2.7.8
+    [Bug fixing]
+    - GC-310: Bug with setRelation when we are using the same table name with a where
+    - GC-406: When we only have actions as buttons then the header is missing the first column
+2.7.7
+    [Features]
+    - GC-404: callbackAddField has no information about the field
+    [Bug fixing]
+    - GC-405: Bug on Select All none checkbox for multiple delete
+    [Code Cleanup]
+    - GC-403: Refactor Datagrid with Redux
+2.7.6
+    [Features]
+    - GC-393: Max length over texts doesn't work as expected
+    - GC-400: Add "hash in URL" configuration from PHP
+    - GC-401: Add "open in modal" configuration from PHP
+    [Bug fixing]
+    - GC-398: Checkbox "Close modal on save" doesn't work anymore
+    - GC-399: Validation message doesn't pick up the language automatically from the setLanguage
+2.7.5
+    [Features]
+    - GC-389: Add JavaScript callbacks: callbackAfterDelete and callbackBeforeDelete
+    [Bug fixing]
+    - GC-392: multiselect_searchable type not updating or inserting value
+    [Code cleanup]
+    - GC-391: Refactor search columns with React
+2.7.4
+    [Bug fixing]
+    - GC-379: Bug with setRelation and multiple fields when a field is null or empty
+    [Features]
+    - GC-381: Icons for mobile for filter and settings
+    - GC-387: Add new field type: time
+    - GC-388: Add configuration for allowed upload file extensions
+    [Code cleanup]
+    GC-384: Refactoring DatagridColumns with React
+2.7.3
+    [Features]
+    - GC-374: CK Editor with options
+    - GC-378: Add new JavaScript functions: callbackBeforeInsert, callbackBeforeUpdate, callbackAfterInsert, callbackAfterUpdate
+    [Bug fixing]
+    - GC-377: setDependedRelation bug with filtering on the datagrid and setRelation with multiple fields
+2.7.2
+    [Features]
+    - Get latest React 16.8.2 and refactor all of the React components to get easier React updates at the future
+    [Bug fixing]
+    - GC-375: SetRelationNtoN doesn't show the read-only data on "view" state
+    [Security fixes]
+    - GC-376: XSS security fix on URL with quotes
+2.7.1
+    [Features]
+    - GC-338: New field type: float
+    - GC-372: Update field type: boolean
+2.7.0
+    [Bug fixing]
+    - GC-369: setRelation with brackets doesn't work (it is throwing an unexpected error)
+    - GC-371: setRelationNtoN doesn't work (it is throwing a PHP error)
+    - GC-368: Postgre database: Error on filtering with setRelationNtoN
+    [Features]
+    - GC-366: Delete file button shouldn't remove the file from the hard drive by default
+2.6.11
+    [Bug fixing]
+        - GC-364: Browser's autocomplete is overlapping datepicker
+    [Features]
+        - GC-299: Create functionality in order to upload files as a BLOB type
+2.6.10
+    [Features]
+        - GC-331: Ability to have a JavaScript callback on callbackField methods (e.g. callbackAddField, callbackEditField,... e.t.c.)
+    [Bug fixing]
+        - GC-361: callbackEditField is caching the input in edge cases
+        - GC-360: Export is not filtering when we search with the filter button
+2.6.9
+    [Features]
+        - GC-353: Create datagrid row callback for JavaScript calls on row render
+        - GC-358: Support SVG image upload
+    [Security Fixes]
+        - GC-357: Filter columns - Add extra security filtering so we cannot search other columns that are not available in the grid
+2.6.8
+    [Bug fixing]
+        - GC-346: setRelationNtoN doesn't work correctly with Postgre database
+        - GC-347: Postgre database doesn't work with PHP 7.2
+2.6.7
+    [Bug fixing]
+       - GC-345: fieldTypeAddForm and fieldTypeEditForm doesn't work with a third parameter (e.g. dropdown_search with an array)
+2.6.6
+    [Features]
+        - GC-280: Add and Edit form into a different page
+    [Bug Fixing]
+        - GC-340: Datagrid doesn't work when setDependentRelation has the format "{fieldname1} {fieldname2}"
+        - GC-339: No Export Data with dropdown and multiple dropdown fieldType
+2.6.5
+    [Bug Fixing]
+        - GC-335: Bug with setRelationNtoN when we are having an empty selection on update state
+        - GC-337: Bug with multiple delete that caches the checkbox selection on latest React version
+2.6.4
+    [Translations]
+       - GC-326: Adding Portuguese translation
+       - GC-327: Adding a translation to the string "Loading"
+       - GC-333: Add dropdown search translations everywhere (and not only on add/edit form)
+    [Features]
+       - GC-330: Create new function: callbackCloneField
+    [Bug Fixing]
+       - GC-325: callbackEditField doesn't work as expected with clone
+2.6.3
+    [Features]
+    - GC-316: Create functionality to disable the load of select2. New function unsetSelect2
+    [Bug Fixing]
+    - GC-312: Bug when you exporting from page 2 we are exporting an empty table
+    - GC-317: Depended dropdown list - Check on the backend if the string length is >= 2 chars
+    - GC-318: Callback Column Export doesn't trim the HTML tags
+    - GC-322: setFieldUpload doesn't support CSRF protection without the header of X-CSRF-TOKEN
+    [Documentation]
+    - GC-315: Include an example with search and multiple search on the example of "Create a custom model"
+    - GC-320: Add an example for: CallbackDeleteMultiple
+    - GC-324: Add a warning message to the callbackDelete and callbackDeleteMultiple as you will need to implement both callbacks in order to have a correct callback behavior
+2.6.2
+   - GC-308: Searchable dropdown list type on datagrid doesn't load the jQuery search plugin.
+   - GC-309: unsetSearchColumns functionality
+2.6.1
+   - GC-295: Depended Dropdown list. Adding a new function with name: setDependentRelation
+2.6.0
+    - GC-300: Update French language
+    - GC-302: Update composer dependencies and remove deprecated packages
+    - GC-301: Unique fields doesn't work
+    - GC-303: setRelationNtoN disable ordering
+2.5.7
+    - GC-294: MSSQL driver (Microsoft SQL) doesn't work for PHP 7.2
+2.5.6
+    - GC-289: Create Clone functionality. Creating 6 new functions: setClone, unsetClone, cloneFields, unsetCloneFields, readOnlyCloneFields, fieldTypeCloneForm
+    - GC-290: Extending Grocery CRUD enterprise for i18n to be added dynamically. New function: setLanguagePath
+2.5.5
+    - GC-272: Dynamic CSRF token. Creation of functions: setCsrfTokenName and setCsrfTokenValue
+2.5.4
+    - GC-287: callbackEditField will need to get as 3rd parameter the row data
+    - GC-286: Quick search for relationNtoN doesn't work on the main datagrid
+2.5.3
+    - GC-281: Bootstrap V4 compatibility
+    - GC-282: Create new functionality setSkin
+    - GC-283: Adding min-width to the columns.
+    - GC-284: An editable rich texteditor appears on the read/view when it shouldn't
+    - GC-285: Left direction of hidden/visible columns when it doesn't fit the screen
+2.5.2
+    - GC-272: Dynamic CSRF token
+    - GC-273: Refactoring of the settings button code for a better User Experience (UX)
+    - GC-276: Refactoring of the modal forms code in order to improve performance
+2.5.1
+    - GC-268: Have the ability to get multiple ordering fields
+2.5.0
+    - GC-248: Create filters for the grid search
+    - GC-255: Bug when the unsetDelete() is enabled a checkbox is still there (although it should be hidden)
+2.4.2
+    - GC-257: Remembering state for visible columns
+2.4.1
+    - GC-219: Remove the full page functionality
+    - GC-245: Searchable select on datagrid
+    - GC-217: When there is no paging, only at the first refresh the buttons are appearing although in reality they can't be pressed.
+2.4.0
+    - GC-229: Add the ability for the developer to choose a unique date format and input for all browsers.
+    - GC-242: Update to React Fiber (version 16)
+    - GC-240: Cover basic concepts so bootstrap v4 CSS will not break.
+    - GC-244: transfer all the jquery extra headers to the upload library as well (useful for CSRF and cross origin requests)
+2.3.7
+    - GC-241: Better UI for the search functionality for date and datetime at the datagrid.
+2.3.6
+    - GC-237: The datagrid character limiter doesn't work correctly on some utf-8 chars (such as Russian, Greek,... e.t.c.)
+    - GC-236: setRelationNtoN doesn't work anymore with a callbackColumn combination
+    - GC-232: Bug for callbackEditField, callbackReadField: showing nothing when the value is "0", "" or NULL
+    - GC-235: Adding a new facade function fieldTypeFormFields that is basically calling: fieldTypeAddForm, fieldTypeEditForm and fieldTypeReadForm.
+    - GC-234: Create new function fieldTypeColumn.
+    - GC-233: callbackColumn not working for certain type of fields.
+2.3.5
+    - GC-231: setRelationNtoN with brackets on the name
+    - GC-193: setRelationNtoN with where statement
+2.3.4
+    - GC-228: Not all the row is available in a callback column
+    - GC-225: Add new Native and Searchable Multiselect field type
+    - GC-227: Add unsetReact function so we can optimise the call of ReactJS
+2.3.3
+    - GC-222: Add function: setConfig - Set Config functionality to apply easily custom configurations for custom purposes
+    - GC-224: Bug with Relation N to N and export/print
+2.3.2
+    - GC-220: Add functions: callbackAddField, callbackEditField, callbackReadField
+    - GC-213: Have different field types on add, edit or read section. Creating 3 new functions: fieldTypeAddForm, fieldTypeEditForm, fieldTypeReadForm
+2.3.1
+    - GC-192: Create new functionality - readOnlyAddFields, readOnlyEditFields
+2.3.0
+    - GC-209: Upload functionality - Better error reporting
+    - GC-207: Read only fields with different layout
+    - GC-206: New field type: Dropdown with search
+    - GC-182: New field type: setRelation with no search
+2.2.9
+    - GC-202: Unexpected error when there are non english chars and a datetime field as column
+2.2.8
+    - Small code change. At the default Model return the insertId after the insert.
+2.2.7
+    - GC-196: Return $this to all the set functions so they can be chained.
+    - GC-131: Bug: Do not cache when there is an error at the datagrid call
+    - GC-198: Bug: CK Editor link button doesn't work
+2.2.6
+    - GC-181: Update CK Editor version as there is a problem with copy-paste of any text on the editor
+    - GC-186: Select all/none for the delete checkboxes on the datagrid
+    - GC-188: Create setPrimaryKey function so we can have this functionality directly from the CRUD rather than needing a custom model
+    - GC-195: Automatically render the submenu to the left if there is not enough space.
+    - GC-185: Action Buttons created for the frontend (JavaScript)
+2.2.5
+    - Spanish Translations
+    - GC-183: Add version to the files so we will not have any JS and CSS caching issues
+    - GC-184: Add HTML Preview if the generic Modal Error is in HTML
+    - GC-165: Configuration 'default_per_page' and 'paging_options' doesn't work
+2.2.4
+    - GC-180: The developer can't change the default language from the config file
+    - GC-179: Not all the strings are translated. For example the placeholders from field dropdown and file uploader.
+2.2.3
+    - GC-175: Add setting hashEvents to the Frontend (JavaScript) so we can have a configurable way to disable hash events
+    - GC-176: Create new function unsetAutoloadJavaScript
+2.2.2
+    - GC-174: Bug: URL hash is not resetting when we close the popup modal
+2.2.1
+    - GC-173: Bug: Action buttons are removed when we have all the operations disabled.
+2.2.0
+    - GC-164: Message "Are you sure that you want to delete this item?" should be more specific about which item(s) is about to delete
+    - GC-160: Paging display bug
+    - Removing the slide-up/slide-down button from the top right corner
+    - Cosmetic datagrid changes
+2.1.9
+    - GC-167: setRelation to have combination of fields and custom ordering. For example: $crud->setRelation('office','offices','{city} - {address}')
+2.1.8
+    - GC-157: Set relation with a where statement as an optional parameter
+    - GC-161: CallbackAddForm, CallbackEditForm and CallbackReadForm doesn't stop when we return false or an error message
+    - Upload the filename as is with a trim and transformation of special chars.
+2.1.7
+    - Add defaultOrdering functionality
+    - GC-158: Bug: Grocery CRUD Enterprise will not load in case that the scripts are on the head
+2.1.6
+    - Add $crud->where functionality
+    - Faster delete animation for delete row
+2.1.5
+    - Remove hardcoded limit for set relation
+    - GC-155 - Add 3 new callback methods, to manipulate the data before the render
+       - callbackAddForm
+       - callbackEditForm
+       - callbackReadForm
+2.1.4
+    - Optimize the set relation by replacing the ids within JavaScript rather than joining the tables.
+2.1.3
+    - GC-150: callbackColumn doesn't work as expected on export and on print
+    - GC-152: Column names on print and export to be presented as the displayAs columns rather than their default ones.
+2.1.2
+    - Fixing bug when a wrong custom bootstrap.js is added. Error: emulateTransitionEnd is not a function
+2.1.1
+    - Adding one more fieldType: 'password'
+    - Adding a dropdown at the search columns for relational data
+2.1.0
+    - Adding jquery timer plugin into the main file rather than a separate one
+    - Adding a new function unsetModernizr as we need to be able to remove the Modernizr and add our own
+    - Having as default relational_n_n and set_relation with the non native select for desktop (chosen plugin)
+2.0.6
+    - Adding extra join and where statements at the relational data
+2.0.5
+    - GC-144: Can't add primary key to be visible as columns
+    - GC-145: When the read button is the only button it does appear under the more button when it shouldn't
+2.0.4
+    - Bugfix: When all the buttons are disabled the grid doesn't show any columns!
+    - Add Callbacks for Multiple Delete Operation
+    - Show error message on callback error
+2.0.3
+     - Xss clean functionality
+2.0.2
+    - New function: unsetMultipleDelete
+    - Add searchable relation-n-n type
+2.0.1
+	- Adding the checkbox boolean to be searchable at the initial datagrid
