@@ -25,6 +25,8 @@ class Options extends AdminController
 
 		$crud->setLanguage(ucfirst($this->session->userdata('language_label')));
 
+		$crud->defaultOrdering('BotOption.OrderKey', 'asc');
+
 		$crud->displayAs('IdOrganization',$this->lang->line('app_crud_option_id_organization'));
 		$crud->displayAs('IdOptionType',$this->lang->line('app_crud_option_id_option_type'));
 		$crud->displayAs('Name',$this->lang->line('app_crud_option_text'));
@@ -123,6 +125,8 @@ class Options extends AdminController
 		$crud->setSkin('bootstrap-v4');
 
 		$crud->setLanguage(ucfirst($this->session->userdata('language_label')));
+
+		$crud->defaultOrdering('BotOption.OrderKey', 'asc');
 
 		$crud->displayAs('IdOrganization',$this->lang->line('app_crud_option_id_organization'));
 		$crud->displayAs('IdOptionType',$this->lang->line('app_crud_option_id_option_type'));
