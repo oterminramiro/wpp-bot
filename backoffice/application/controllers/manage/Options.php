@@ -182,7 +182,8 @@ class Options extends AdminController
 			'content' => 'app/views/crud',
 			'output' => $output->output,
 			'css_files' => $output->css_files,
-			'js_files' => $output->js_files
+			'js_files' => $output->js_files,
+			'breadcrumb' => $Option->Guid
 		]);
 
 	}
