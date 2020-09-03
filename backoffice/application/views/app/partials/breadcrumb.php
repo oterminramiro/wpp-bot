@@ -4,7 +4,7 @@
 			<ol class="breadcrumb">
 				<?php if(isset($breadcrumb)): ?>
 					<li class="breadcrumb-item"><a href="">Manage</a></li>
-					<li class="breadcrumb-item"><a href="">Options</a></li>
+					<li class="breadcrumb-item"><a href="/manage/options/index">Options</a></li>
 					<?php
 						$Option = Option::where('Guid',$breadcrumb)->first();
 						$links[$Option->Guid] = $Option->Name;
