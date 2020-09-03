@@ -16,15 +16,10 @@ app.config['MYSQL_DATABASE_DB'] = 'flask'
 mysql.init_app(app)
 cache = redis.Redis(host='redis', port=6379)
 
+@app.route('/bot/<guid>', methods=['POST'])
+def bot(guid):
 
-@app.route("/")
-def hello():
-	return "Hello World!"
-
-@app.route('/bot', methods=['POST'])
-def bot():
-
-	incoming_msg = request.values.get('Body', '').lower()
+	answer = request.values.get('Body', '').lower()
 	sender = request.values.get("From").split(':')
 	sender = sender[1]
 
@@ -32,40 +27,78 @@ def bot():
 	msg = resp.message()
 	responded = False
 
-	if cache.hget('customers',sender) == None:
-		if ('ailu' in incoming_msg)  or ('1' in incoming_msg):
-			msg.body('ailu hermosa')
-			responded = True
-		if ('gatito' in incoming_msg) or ('2' in incoming_msg):
-			# return a cat pic
-			msg.media('https://cataas.com/cat')
-			responded = True
-		if ('sender' in incoming_msg)  or ('3' in incoming_msg):
-			msg.body(sender)
-			responded = True
-		if ('mas' in incoming_msg)  or ('4' in incoming_msg):
-			msg.body("""Mas opciones:
-1) inicio
-2) pepito
-3) ramiro""")
-			responded = True
-	else:
-		cache.hset('customers',sender, incoming_msg)
+	conn = mysql.connect()
+	cursor = conn.cursor()
 
-		if ('inicio' in incoming_msg)  or ('1' in incoming_msg):
-			responded = False
-		if ('pepito' in incoming_msg)  or ('2' in incoming_msg):
-			msg.body('pepito')
-			responded = True
+	# Get Organization
+	cursor.execute("SELECT * from Organization WHERE Guid=%s", guid)
+	org = cursor.fetchone()
 
-	if not responded:
-		msg.body("""Hola! Tus opciones son:
-1) 'ailu'
-2) 'gatito'
-3) 'sender'
-4) 'mas'
-""")
-	return str(resp)
+	if org:
+		get_cache = cache.hget('customers',sender)
+		if get_cache == None:
+			cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
+			option = cursor.fetchall()
+
+			cache.hset('customers',sender, pickle.dumps(option))
+
+			text = []
+			for respuesta in option:
+				text.append(respuesta[2] + ") " + respuesta[1])
+
+			final_text = ' '.join(text)
+
+			msg.body(final_text)
+			responded = True
+		else:
+			# Convertir a lista
+			response = list(pickle.loads(get_cache))
+			if response:
+				# Result devuelve una lista con el tuple q concuerda al filtro
+				result = [item for item in response if item[2] == answer]
+				if result:
+					# Buscar las opciones siguentes a la anterior
+					cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", result[0][0])
+					option = cursor.fetchall()
+					if option:
+						cache.hset('customers',sender, pickle.dumps(option))
+
+						text = []
+						for respuesta in option:
+							text.append(respuesta[2] + ") " + respuesta[1])
+
+						final_text = ' '.join(text)
+
+						msg.body(final_text)
+						responded = True
+
+					else:
+						msg.body('no hay mas opciones')
+						responded = True
+				else:
+					msg.body('la opcion enviada no corresponde')
+					responded = True
+
+			else:
+				# No cache
+				cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
+				option = cursor.fetchall()
+
+				cache.hset('customers',sender, pickle.dumps(option))
+
+				text = []
+				for respuesta in option:
+					text.append(respuesta[2] + ") " + respuesta[1])
+
+				final_text = ' '.join(text)
+
+				msg.body(final_text)
+				responded = True
+
+		if not responded:
+			msg.body('responded false')
+
+		return str(resp)
 
 
 @app.route('/db', methods=['GET'])
@@ -87,48 +120,75 @@ def redis():
 	else:
 		pass
 
-@app.route('/org/<username>', methods=['POST'])
-def org(username):
+@app.route('/org/<guid>', methods=['POST'])
+def org(guid):
 	answer = request.form.get("Answer")
-
 	conn = mysql.connect()
 	cursor = conn.cursor()
 
 	# Get Organization
-	cursor.execute("SELECT * from Organization WHERE Name=%s", username)
+	cursor.execute("SELECT * from Organization WHERE Guid=%s", guid)
 	org = cursor.fetchone()
 
-	get_cache = cache.hget('customers','+5491141461868')
-	if get_cache == None:
-		cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
-		option = cursor.fetchall()
-
-		cache.hset('customers','+5491141461868', pickle.dumps(option))
-
-		return jsonify({"desired": option})
-	else:
-		# Convertir a lista
-		response = list(pickle.loads(get_cache))
-		if response:
-			# Result devuelve una lista con el tuple q concuerda al filtro
-			result = [item for item in response if item[3] == answer]
-
-			# Buscar las opciones siguentes a la anterior
-			cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", result[0][0])
-			option = cursor.fetchall()
-
-			if option == None:
-				return jsonify({"desired": "no option"})
-			else:
-				return jsonify({"desired": option})
-		else:
-			cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
+	if org:
+		get_cache = cache.hget('customers','+5491141461868')
+		if get_cache == None:
+			cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
 			option = cursor.fetchall()
 
 			cache.hset('customers','+5491141461868', pickle.dumps(option))
 
-			return jsonify({"desired": option})
+			text = []
+			for respuesta in option:
+				text.append(respuesta[2] + ") " + respuesta[1])
 
+			final_text = ' '.join(text)
+
+			return final_text
+		else:
+			# Convertir a lista
+			response = list(pickle.loads(get_cache))
+			if response:
+				# Result devuelve una lista con el tuple q concuerda al filtro
+				result = [item for item in response if item[2] == answer]
+				if result:
+					# Buscar las opciones siguentes a la anterior
+					cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", result[0][0])
+					option = cursor.fetchall()
+					if option:
+						cache.hset('customers','+5491141461868', pickle.dumps(option))
+
+						text = []
+						for respuesta in option:
+							text.append(respuesta[2] + ") " + respuesta[1])
+
+						final_text = ' '.join(text)
+
+						return final_text
+
+					else:
+						return 'no hay mas opciones'
+				else:
+					return 'la opcion enviada no corresponde'
+
+			else:
+				# No cache
+				cursor.execute("SELECT IdBotOption, Guid, Name, KeyWord, IdOptionValue from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org[0])
+				option = cursor.fetchall()
+
+				cache.hset('customers','+5491141461868', pickle.dumps(option))
+
+				text = []
+				for respuesta in option:
+					text.append(respuesta[2] + ") " + respuesta[1])
+
+				final_text = ' '.join(text)
+
+				return final_text
+
+@app.route("/")
+def hello():
+	return "Hello World!"
 
 if __name__ == '__main__':
 	app.run()
