@@ -69,7 +69,6 @@ def bot(guid):
 					# Type Text
 					if result[0][5] == 1:
 
-
 						# Guardar en cache por si se quiere volver
 						get_options = cache.hget('answers',sender)
 						if get_options:
@@ -79,8 +78,6 @@ def bot(guid):
 							response_options = [ result[0][4] ]
 
 						seleccionadas = cache.hset('answers',sender, pickle.dumps(response_options))
-
-
 
 						# Buscar las opciones siguentes a la anterior
 						cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue , Guid, IdOptionType from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", result[0][0])
@@ -98,26 +95,33 @@ def bot(guid):
 							responded = True
 
 						else:
-							get_options = cache.hget('answers',sender)
-							response_options = list(pickle.loads(get_options))
-
-							text = ['Tus opciones elegidas son:']
-							for respuesta in response_options:
-								text.append(respuesta)
-
-							final_text = '\n'.join(text)
-
-							# Delete cache for fresh start
-							delcache = cache.hdel('customers',sender)
-							delcache = cache.hdel('answers',sender)
-
-							msg.body(final_text)
-							#msg.body('no hay mas opciones')
+							msg.body('no hay mas opciones')
 							responded = True
 
 					# Type Return
 					if result[0][5] == 2:
-						pass
+						# Me traigo a la opcion padre
+						cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue , Guid, IdOptionType from BotOption WHERE IdBotOption=%s ORDER BY OrderKey", result[0][3])
+						option_padre = cursor.fetchone()
+						# Traer las opciones conjuntas al padre
+						cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue , Guid, IdOptionType from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", option_padre[3])
+						option = cursor.fetchall()
+
+						if option:
+							cache.hset('customers',sender, pickle.dumps(option))
+
+							text = []
+							for respuesta in option:
+								text.append(respuesta[2] + ") " + respuesta[1])
+
+							final_text = '\n'.join(text)
+
+							msg.body(final_text)
+							responded = True
+
+						else:
+							msg.body('no more options')
+							responded = True
 
 					# Type Finish
 					if result[0][5] == 3:
@@ -211,7 +215,7 @@ def org(guid):
 							for respuesta in option:
 								text.append(respuesta[2] + ") " + respuesta[1])
 
-							final_text = ' '.join(text)
+							final_text = '\n'.join(text)
 
 							return jsonify({"desired": final_text})
 
@@ -223,14 +227,38 @@ def org(guid):
 							for respuesta in response_options:
 								text.append(respuesta)
 
-							final_text = ' '.join(text)
+							final_text = '\n'.join(text)
+
+							# Delete cache for fresh start
+							delcache = cache.hdel('customers',sender)
+							delcache = cache.hdel('answers',sender)
 
 							#return jsonify({"desired": 'no more option'})
 							return jsonify({"desired": final_text})
 
 					# Type Return
 					if result[0][5] == 2:
-						pass
+
+						# Me traigo a la opcion padre
+						cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue , Guid, IdOptionType from BotOption WHERE IdBotOption=%s ORDER BY OrderKey", result[0][3])
+						option_padre = cursor.fetchone()
+						# Traer las opciones conjuntas al padre
+						cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue , Guid, IdOptionType from BotOption WHERE IdOptionValue=%s ORDER BY OrderKey", option_padre[3])
+						option = cursor.fetchall()
+
+						if option:
+							cache.hset('customers',sender, pickle.dumps(option))
+
+							text = []
+							for respuesta in option:
+								text.append(respuesta[2] + ") " + respuesta[1])
+
+							final_text = '\n'.join(text)
+
+							return jsonify({"desired": final_text})\
+
+						else:
+							return jsonify({"desired": 'no more option'})
 
 					# Type Finish
 					if result[0][5] == 3:
@@ -239,10 +267,14 @@ def org(guid):
 						response_options = list(pickle.loads(get_options))
 
 						text = ['Tus opciones elegidas son:']
-						for respuesta in option:
-							text.append(respuesta[2] + ") " + respuesta[1])
+						for respuesta in response_options:
+							text.append(respuesta)
 
-						final_text = ' '.join(text)
+						final_text = '\n'.join(text)
+
+						# Delete cache for fresh start
+						delcache = cache.hdel('customers',sender)
+						delcache = cache.hdel('answers',sender)
 
 						return jsonify({"desired": final_text})
 				else:
