@@ -1,8 +1,8 @@
-<div class="col-lg-3">
+<div class="col-6 mx-auto">
 	<div class="card">
 		<div class="card-body">
 			<div class="text-center mt-3">
-				<img src="assets/images/users/avatar-7.jpg" alt=""
+				<img src="/assets/themes/app/images/users/avatar-7.jpg" alt=""
 					class="avatar-lg rounded-circle" />
 				<h5 class="mt-2 mb-0">Shreyu N</h5>
 				<h6 class="text-muted font-weight-normal mt-2 mb-0">User Experience Specialist

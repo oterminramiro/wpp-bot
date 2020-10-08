@@ -21,7 +21,7 @@
 	<body class="authentication-bg">
 
 		<div class="account-pages my-5">
-			<div class="container">
+			<div class="container py-5">
 				<div class="row justify-content-center">
 					<div class="col-xl-10">
 						<div class="card">
@@ -31,7 +31,7 @@
 										<div class="mx-auto mb-5">
 											<a href="index.html">
 												<img src="/assets/themes/app/images/logo.png" alt="" height="24" />
-												<h3 class="d-inline align-middle ml-1 text-logo">Shreyu</h3>
+												<h3 class="d-inline align-middle ml-1 text-logo">WPP Bot</h3>
 											</a>
 										</div>
 

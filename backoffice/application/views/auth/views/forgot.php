@@ -7,7 +7,7 @@
 	Enter your email address and we'll send you an email with instructions to reset your password.
 </p>
 
-<form action="/auth/forgot_password/" method="post">
+<form class="pb-5 pt-3" action="/auth/forgot_password/" method="post">
 	<div class="form-group">
 		<label class="form-control-label">Email Address</label>
 		<div class="input-group input-group-merge">

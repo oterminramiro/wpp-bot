@@ -39,14 +39,18 @@ class Options extends AdminController
 
 		$crud->callbackColumn('IdOptionValue', function ($value, $row) {
 			$this_option = Option::where('IdBotOption',$row->IdBotOption)->first();
-			$options = Option::where('IdOptionValue',$this_option->IdBotOption)->get();
-			if(count($options) == 0)
+			$output = '';
+			if($this_option->IdOptionType == 1)
 			{
-				$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_no_options').'</a>';
-			}
-			else
-			{
-				$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_options').'('.count($options).')</a>';
+				$options = Option::where('IdOptionValue',$this_option->IdBotOption)->get();
+				if(count($options) == 0)
+				{
+					$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_no_options').'</a>';
+				}
+				else
+				{
+					$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_options').'('.count($options).')</a>';
+				}
 			}
 			return $output;
 		});
@@ -140,16 +144,20 @@ class Options extends AdminController
 
 		$crud->callbackColumn('IdOptionValue', function ($value, $row) {
 			$this_option = Option::where('IdBotOption',$row->IdBotOption)->first();
-			$options = Option::where('IdOptionValue',$this_option->IdBotOption)->get();
-			if(count($options) == 0)
+			$output = '';
+			if($this_option->IdOptionType == 1)
 			{
-				$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_no_options').'</a>';
+				$options = Option::where('IdOptionValue',$this_option->IdBotOption)->get();
+				if(count($options) == 0)
+				{
+					$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_no_options').'</a>';
+				}
+				else
+				{
+					$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_options').'('.count($options).')</a>';
+				}
+				return $output;
 			}
-			else
-			{
-				$output = '<a class="badge badge-soft-secondary" href="/manage/options/options_value/'.$this_option->Guid.'" >'.$this->lang->line('app_crud_option_options').'('.count($options).')</a>';
-			}
-			return $output;
 		});
 
 

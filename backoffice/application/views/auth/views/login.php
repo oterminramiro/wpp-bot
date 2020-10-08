@@ -10,7 +10,7 @@
 <p class="text-muted mt-1 mb-4">Enter your email address and password to
 	access admin panel.</p>
 
-<form role="form" method="POST" method="/auth/login/">
+<form class="pb-5 pt-3" role="form" method="POST" method="/auth/login/">
 
 	<div class="form-group">
 		<label class="form-control-label">Email Address</label>

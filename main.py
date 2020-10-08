@@ -16,12 +16,7 @@ app.config['MYSQL_DATABASE_DB'] = 'flask'
 mysql.init_app(app)
 cache = redis.Redis(host='redis', port=6379)
 
-def fetch_options_by_org(cursor,org,cache,sender):
-	cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue, Guid, IdOptionType from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org)
-	option = cursor.fetchall()
-
-	cache.hset('customers',sender, pickle.dumps(option))
-
+def create_text_response(option):
 	text = []
 	for respuesta in option:
 		text.append(respuesta[2] + ") " + respuesta[1])
@@ -29,6 +24,14 @@ def fetch_options_by_org(cursor,org,cache,sender):
 	final_text = '\n'.join(text)
 
 	return final_text
+
+def fetch_options_by_org(cursor,org,cache,sender):
+	cursor.execute("SELECT IdBotOption, Name, KeyWord, IdOptionValue, Guid, IdOptionType from BotOption WHERE IdOrganization=%s AND IdOptionValue IS NULL ORDER BY OrderKey", org)
+	option = cursor.fetchall()
+
+	cache.hset('customers',sender, pickle.dumps(option))
+
+	return create_text_response(option)
 
 @app.route('/bot/<guid>', methods=['POST'])
 def bot(guid):
@@ -85,13 +88,7 @@ def bot(guid):
 						if option:
 							cache.hset('customers',sender, pickle.dumps(option))
 
-							text = []
-							for respuesta in option:
-								text.append(respuesta[2] + ") " + respuesta[1])
-
-							final_text = '\n'.join(text)
-
-							msg.body(final_text)
+							msg.body(create_text_response(option))
 							responded = True
 
 						else:
@@ -110,13 +107,7 @@ def bot(guid):
 						if option:
 							cache.hset('customers',sender, pickle.dumps(option))
 
-							text = []
-							for respuesta in option:
-								text.append(respuesta[2] + ") " + respuesta[1])
-
-							final_text = '\n'.join(text)
-
-							msg.body(final_text)
+							msg.body(create_text_response(option))
 							responded = True
 
 						else:

@@ -128,7 +128,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-12">
-								2019 &copy; All Rights Reserved. Made by <a href="https://github.com/oterminramiro" target="_blank">oterminramiro</a>
+								<?php echo date('Y') ?> &copy; All Rights Reserved. <!-- Made by <a href="https://github.com/oterminramiro" target="_blank">oterminramiro</a> -->
 							</div>
 						</div>
 					</div>
